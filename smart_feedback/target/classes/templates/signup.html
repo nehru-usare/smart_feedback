@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .signup-container {
+            background-color: #ffffff; /* White background for form */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .signup-container h2 {
+            color: #333333; /* Dark gray for header */
+            margin-bottom: 20px;
+        }
+
+        .signup-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .signup-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333333; /* Dark gray button */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .signup-container button:hover {
+            background-color: #444444; /* Darker gray on hover */
+        }
+
+        .signup-container p {
+            color: #ff4d4d; /* Red for error messages */
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .login-link {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #333333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form action="/signup" method="POST">
+            <input type="text" name="username" placeholder="Username" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
+            <button type="submit">Sign Up</button>
+        </form>
+        
+        <p th:if="${error}">Passwords do not match or something went wrong</p>
+
+        <!-- Login Link -->
+        <div class="login-link">
+            <p>Already have an account? <a href="/login">Login</a></p>
+        </div>
+    </div>
+
+</body>
+</html>

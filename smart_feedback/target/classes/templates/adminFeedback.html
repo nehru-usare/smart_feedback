@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Feedback</title>
+<style>
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f9;
+}
+
+.container {
+    width: 100%;
+    margin: 30px auto;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+}
+
+th {
+    background-color: #2c3e50;
+    color: white;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #ecf0f1;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.action-button {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.view-button {
+    background-color: #3498db;
+}
+
+.view-button:hover {
+    background-color: #2980b9;
+}
+
+.edit-button {
+    background-color: #f39c12;
+}
+
+.edit-button:hover {
+    background-color: #e67e22;
+}
+
+.delete-button {
+    background-color: #e74c3c;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+}
+</style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>All Feedback</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Feedback</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="feedback : ${feedbacks}">
+                    <td th:text="${feedback.id}"></td>
+                    <td th:text="${feedback.feedback}"></td>
+                    <td th:text="${#dates.format(feedback.date, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td class="actions">
+                        <!-- View Button -->
+                        <form th:action="@{/admin/viewFeedback/{id}(id=${feedback.id})}" method="get">
+                            <button class="action-button view-button" type="submit">View</button>
+                        </form>
+                        
+                        <!-- Edit Button -->
+                        <form th:action="@{/admin/editFeedback/{id}(id=${feedback.id})}" method="get">
+                            <button class="action-button edit-button" type="submit">Edit</button>
+                        </form>
+                        
+                        <!-- Delete Button (Changed to POST method) -->
+                        <form th:action="@{/admin/deleteFeedback/{id}(id=${feedback.id})}" method="get">
+                            <button class="action-button delete-button" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
